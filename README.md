@@ -1,1 +1,1 @@
-# qsim_on_colab
+# cuQuantum on Colab
