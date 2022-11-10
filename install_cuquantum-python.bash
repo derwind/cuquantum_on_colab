@@ -55,7 +55,7 @@ setup_python38()
 
 setup_cuQuantum()
 {
-    pip3 install cuquantum-python cupy-cuda110
+    pip3 install cuquantum-python cupy-cuda112
 }
 
 setup_qsim()
