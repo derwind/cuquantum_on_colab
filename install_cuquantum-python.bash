@@ -58,14 +58,6 @@ setup_cuQuantum()
     pip3 install cuquantum-python cupy-cuda112
 }
 
-setup_qsim()
-{
-    git clone https://github.com/quantumlib/qsim.git
-    cd qsim
-    make clean all
-    pip install .
-}
-
 setup_python38
 setup_cuQuantum
 
