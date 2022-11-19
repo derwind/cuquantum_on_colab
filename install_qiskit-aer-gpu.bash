@@ -61,6 +61,11 @@ setup_dependencies()
     sudo apt install -y cmake && pip3 install pybind11 pluginbase patch-ng node-semver bottle PyJWT fasteners distro colorama conan
 }
 
+override_cmake_settings()
+{
+    perl -pi -e 's/\${ARGN}/Turing/g' /content/dist-packages/usr/local/lib/python3.8/dist-packages/cmake/data/share/cmake-3.24/Modules/FindCUDA/select_compute_arch.cmake
+}
+
 setup_cuQuantum()
 {
     wget https://developer.download.nvidia.com/compute/cuquantum/22.07.1/local_installers/cuquantum-local-repo-ubuntu1804-22.07.1_1.0-1_amd64.deb
@@ -87,7 +92,7 @@ setup_QiskitAerGPU()
     git clone -b 0.11.1 https://github.com/Qiskit/qiskit-aer/
     cd qiskit-aer
     python3 setup.py bdist_wheel -- -DAER_THRUST_BACKEND=CUDA -DCUSTATEVEC_ROOT=$CUQUANTUM_DIR
-    pip3 install dist/qiskit_aer-0.12.0-cp**-cp**-linux_x86_64.whl
+    pip3 install dist/qiskit_aer-0.11.1-cp**-cp**-linux_x86_64.whl
 }
 
 export PATH=/usr/local/cuda-11.2/bin${PATH:+:${PATH} }
@@ -95,6 +100,7 @@ export CUQUANTUM_DIR="/opt/nvidia/cuquantum"
 
 setup_python38
 setup_dependencies
+override_cmake_settings
 setup_cuQuantum
 setup_OpenBLAS
 setup_QiskitExceptAer
