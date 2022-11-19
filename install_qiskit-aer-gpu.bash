@@ -100,8 +100,8 @@ export PATH=/usr/local/cuda-11.2/bin${PATH:+:${PATH} }
 export CUQUANTUM_DIR="/opt/nvidia/cuquantum"
 
 setup_python38
-replace_nvcc
 setup_dependencies
+replace_nvcc
 setup_cuQuantum
 setup_OpenBLAS
 setup_QiskitExceptAer
