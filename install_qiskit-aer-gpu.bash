@@ -58,7 +58,7 @@ setup_dependencies()
 {
     sudo apt install -y nvidia-cuda-toolkit
     sudo apt install -y python3.8-dev
-    sudo apt install -y cmake && pip3 install pybind11
+    sudo apt install -y cmake && pip3 install pybind11 pluginbase patch-ng node-semver bottle PyJWT fasteners distro colorama conan
 }
 
 setup_cuQuantum()
