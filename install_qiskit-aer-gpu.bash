@@ -54,17 +54,21 @@ setup_python38()
     echo "全て、終了したら、「ランタイムのタイプ変更と、再接続」を実施してください"
 }
 
-replace_nvcc()
-{
-    sudo rm /usr/bin/nvcc
-    sudo ln /usr/local/cuda/bin/nvcc /usr/bin/nvcc
-}
-
 setup_dependencies()
 {
-    sudo apt install -y nvidia-cuda-toolkit
     sudo apt install -y python3.8-dev
     sudo apt install -y cmake && pip3 install pybind11 pluginbase patch-ng node-semver bottle PyJWT fasteners distro colorama conan
+}
+
+setup_cuda()
+{
+    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+    sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+    wget https://developer.download.nvidia.com/compute/cuda/11.2.0/local_installers/cuda-repo-ubuntu1804-11-2-local_11.2.0-460.27.04-1_amd64.deb
+    sudo dpkg -i cuda-repo-ubuntu1804-11-2-local_11.2.0-460.27.04-1_amd64.deb
+    sudo apt-key add /var/cuda-repo-ubuntu1804-11-2-local/7fa2af80.pub
+    sudo apt-get update
+    sudo apt-get -y install cuda
 }
 
 setup_cuQuantum()
@@ -101,7 +105,7 @@ export CUQUANTUM_DIR="/opt/nvidia/cuquantum"
 
 setup_python38
 setup_dependencies
-replace_nvcc
+setup_cuda
 setup_cuQuantum
 setup_OpenBLAS
 setup_QiskitExceptAer
