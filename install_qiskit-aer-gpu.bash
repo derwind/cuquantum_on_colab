@@ -1,6 +1,7 @@
 #! /bin/bash
 
 # from https://note.com/kokkkorokoro/n/nc806314d6594
+# https://zenn.dev/converghub/articles/73007f5e24f5fe
 
 setup_python38()
 {
