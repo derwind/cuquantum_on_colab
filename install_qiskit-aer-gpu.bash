@@ -54,16 +54,17 @@ setup_python38()
     echo "全て、終了したら、「ランタイムのタイプ変更と、再接続」を実施してください"
 }
 
+replace_nvcc()
+{
+    sudo rm /usr/bin/nvcc
+    sudo ln /usr/local/cuda/bin/nvcc /usr/bin/nvcc
+}
+
 setup_dependencies()
 {
     sudo apt install -y nvidia-cuda-toolkit
     sudo apt install -y python3.8-dev
     sudo apt install -y cmake && pip3 install pybind11 pluginbase patch-ng node-semver bottle PyJWT fasteners distro colorama conan
-}
-
-override_cmake_settings()
-{
-    perl -pi -e 's/\${ARGN}/Turing/g' /content/dist-packages/usr/local/lib/python3.8/dist-packages/cmake/data/share/cmake-3.24/Modules/FindCUDA/select_compute_arch.cmake
 }
 
 setup_cuQuantum()
@@ -99,8 +100,8 @@ export PATH=/usr/local/cuda-11.2/bin${PATH:+:${PATH} }
 export CUQUANTUM_DIR="/opt/nvidia/cuquantum"
 
 setup_python38
+replace_nvcc
 setup_dependencies
-override_cmake_settings
 setup_cuQuantum
 setup_OpenBLAS
 setup_QiskitExceptAer
