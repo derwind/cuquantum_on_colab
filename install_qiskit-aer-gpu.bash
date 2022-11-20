@@ -89,19 +89,20 @@ setup_OpenBLAS()
 setup_QiskitExceptAer()
 {
     pip3 install "qiskit[all]"
-    pip3 uininstall -y qiskit-aer
+    pip3 uninstall -y qiskit-aer
 }
 
 setup_QiskitAerGPU()
 {
     git clone -b 0.11.1 https://github.com/Qiskit/qiskit-aer/
     cd qiskit-aer
-    python3 setup.py bdist_wheel -- -DAER_THRUST_BACKEND=CUDA -DCUSTATEVEC_ROOT=$CUQUANTUM_DIR
+    python3 setup.py bdist_wheel -- -DAER_THRUST_BACKEND=CUDA -DCUSTATEVEC_ROOT=$CUQUANTUM_DIR -DCUSTATEVEC_STATIC
     pip3 install dist/qiskit_aer-0.11.1-cp**-cp**-linux_x86_64.whl
 }
 
 export PATH=/usr/local/cuda-11.2/bin${PATH:+:${PATH} }
-export CUQUANTUM_DIR="/opt/nvidia/cuquantum"
+export CUQUANTUM_DIR=/opt/nvidia/cuquantum
+export LD_LIBRARY_PATH=$CUQUANTUM_DIR/lib:$LD_LIBRARY_PATH
 
 setup_python38
 setup_dependencies
