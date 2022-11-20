@@ -96,7 +96,7 @@ setup_QiskitAerGPU()
 {
     git clone -b 0.11.1 https://github.com/Qiskit/qiskit-aer/
     cd qiskit-aer
-    python3 setup.py bdist_wheel -- -DAER_THRUST_BACKEND=CUDA -DCUSTATEVEC_ROOT=$CUQUANTUM_DIR -DCUSTATEVEC_STATIC
+    python3 setup.py bdist_wheel -- -DAER_THRUST_BACKEND=CUDA -DCUSTATEVEC_ROOT=$CUQUANTUM_DIR -DCUSTATEVEC_STATIC=True
     pip3 install dist/qiskit_aer-0.11.1-cp**-cp**-linux_x86_64.whl
 }
 
