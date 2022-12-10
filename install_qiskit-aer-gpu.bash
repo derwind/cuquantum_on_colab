@@ -56,7 +56,7 @@ setup_python38()
 
 setup_dependencies()
 {
-    sudo apt install -y python3.8-dev
+    #sudo apt install -y python3.8-dev
     sudo apt install -y cmake && pip3 install pybind11 pluginbase patch-ng node-semver bottle PyJWT fasteners distro colorama conan
 }
 
@@ -104,7 +104,7 @@ export PATH=/usr/local/cuda-11.2/bin${PATH:+:${PATH} }
 export CUQUANTUM_DIR=/opt/nvidia/cuquantum
 export LD_LIBRARY_PATH=$CUQUANTUM_DIR/lib:$LD_LIBRARY_PATH
 
-setup_python38
+#setup_python38
 setup_dependencies
 setup_cuda
 setup_cuQuantum

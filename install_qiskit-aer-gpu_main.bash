@@ -1,6 +1,7 @@
 #! /bin/bash
 
 # from https://note.com/kokkkorokoro/n/nc806314d6594
+# https://zenn.dev/converghub/articles/73007f5e24f5fe
 
 setup_python38()
 {
@@ -56,7 +57,7 @@ setup_python38()
 setup_dependencies()
 {
     #sudo apt install -y python3.8-dev
-    sudo apt install -y cmake && pip3 install pybind11
+    sudo apt install -y cmake && pip3 install pybind11 pluginbase patch-ng node-semver bottle PyJWT fasteners distro colorama conan
 }
 
 setup_cuda()
@@ -79,12 +80,25 @@ setup_cuQuantum()
     sudo apt-get -y install cuquantum cuquantum-dev cuquantum-doc
 }
 
-setup_qsim()
+setup_OpenBLAS()
 {
-    git clone https://github.com/quantumlib/qsim.git
-    cd qsim
-    make clean all
-    pip install .
+    sudo apt-get update
+    sudo apt-get install -y libopenblas-dev
+}
+
+setup_QiskitExceptAer()
+{
+    pip3 install "qiskit[all]"
+    pip3 uninstall -y qiskit-aer
+}
+
+setup_QiskitAerGPU()
+{
+    git clone https://github.com/Qiskit/qiskit-aer/
+    cd qiskit-aer
+    git chackout b42208d
+    python3 setup.py bdist_wheel -- -DAER_THRUST_BACKEND=CUDA -DCUSTATEVEC_ROOT=$CUQUANTUM_DIR -DCUSTATEVEC_STATIC=True
+    pip3 install dist/qiskit_aer-0.12.0-cp**-cp**-linux_x86_64.whl
 }
 
 export PATH=/usr/local/cuda-11.2/bin${PATH:+:${PATH} }
@@ -95,6 +109,8 @@ export LD_LIBRARY_PATH=$CUQUANTUM_DIR/lib:$LD_LIBRARY_PATH
 setup_dependencies
 setup_cuda
 setup_cuQuantum
-setup_qsim
+setup_OpenBLAS
+setup_QiskitExceptAer
+setup_QiskitAerGPU
 
 echo "finish all setup"
