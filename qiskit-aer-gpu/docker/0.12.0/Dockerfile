@@ -19,11 +19,11 @@ RUN apt-get update && \
     apt install -y python3.9-dev python3-pip && \
     ln -s /usr/bin/python3.9 /usr/bin/python && \
     rm -f /usr/bin/python3 && ln -s /usr/bin/python3.9 /usr/bin/python3 && \
-    apt install -y cmake && pip install pybind11 pluginbase patch-ng node-semver==0.8.1 bottle PyJWT fasteners distro colorama conan==1.59.0 scikit-build && \
+    apt install -y cmake && pip install pybind11 pluginbase patch-ng node-semver==0.6.1 bottle PyJWT fasteners distro colorama conan==1.59.0 scikit-build && \
     apt-get install -y libopenblas-dev && \
     pip install "qiskit[all]" && \
     pip uninstall -y qiskit-aer && \
-    cd / && git clone -b fix-cuStateVec_enable https://github.com/derwind/qiskit-aer.git && \
+    cd / && git clone -b 4e10831f89fb49b2652a18056be64cb1db22d190 https://github.com/Qiskit/qiskit-aer.git && \
     cd qiskit-aer && \
     python ./setup.py bdist_wheel -- -DAER_THRUST_BACKEND=CUDA -DAER_CUDA_ARCH="7.5" -DCUQUANTUM_ROOT=$CUQUANTUM_ROOT -DCUTENSOR_ROOT=$CUTENSOR_ROOT -DAER_ENABLE_CUQUANTUM=true  -- && \
     pip install dist/qiskit_aer-0.13.0-cp**-cp**-linux_x86_64.whl && \
