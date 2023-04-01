@@ -21,7 +21,7 @@ RUN apt-get update && \
     pip uninstall -y qiskit-aer && \
     git clone -b 0.11.2 https://github.com/Qiskit/qiskit-aer/ && \
     cd qiskit-aer && \
-    python setup.py bdist_wheel -- -DAER_THRUST_BACKEND=CUDA -DAER_CUDA_ARCH="7.5" -DCUSTATEVEC_ROOT=$CUQUANTUM_ROOT -DCUSTATEVEC_STATIC=True && \
+    python setup.py bdist_wheel -- -DAER_THRUST_BACKEND=CUDA -DAER_CUDA_ARCH="7.5" -DCUSTATEVEC_ROOT=$CUQUANTUM_ROOT && \
     pip install dist/qiskit_aer-0.11.2-cp**-cp**-linux_x86_64.whl && \
     cd .. && \
     rm -rf qiskit_aer
