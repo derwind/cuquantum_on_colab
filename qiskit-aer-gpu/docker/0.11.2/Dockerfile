@@ -15,13 +15,13 @@ RUN apt-get update && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt install -y python3.9-dev python3-pip && \
     ln -s /usr/bin/python3 /usr/bin/python && \
-    apt install -y cmake && pip install pybind11 pluginbase patch-ng node-semver bottle PyJWT fasteners distro colorama conan && \
+    apt install -y cmake && pip install pybind11 pluginbase patch-ng node-semver==0.6.1 bottle PyJWT fasteners distro colorama conan==1.59.0 && \
     apt-get install -y libopenblas-dev && \
-    pip install "qiskit[all]" && \
+    pip install "qiskit[all]==0.41.1" && \
     pip uninstall -y qiskit-aer && \
     git clone -b 0.11.2 https://github.com/Qiskit/qiskit-aer/ && \
     cd qiskit-aer && \
-    python setup.py bdist_wheel -- -DAER_THRUST_BACKEND=CUDA -DCUSTATEVEC_ROOT=$CUQUANTUM_ROOT -DCUSTATEVEC_STATIC=True && \
+    python setup.py bdist_wheel -- -DAER_THRUST_BACKEND=CUDA -DAER_CUDA_ARCH="7.5" -DCUSTATEVEC_ROOT=$CUQUANTUM_ROOT -DCUSTATEVEC_STATIC=True && \
     pip install dist/qiskit_aer-0.11.2-cp**-cp**-linux_x86_64.whl && \
     cd .. && \
     rm -rf qiskit_aer
