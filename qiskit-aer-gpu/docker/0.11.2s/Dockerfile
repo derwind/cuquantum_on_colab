@@ -26,7 +26,7 @@ RUN apt-get update && \
     apt-get install -y libopenblas-dev && \
     pip install "qiskit[all]==0.41.1" && \
     pip uninstall -y qiskit-aer && \
-    git clone -b 0.11.2 https://github.com/Qiskit/qiskit-aer/ && \
+    cd / && git clone -b 0.11.2 https://github.com/Qiskit/qiskit-aer/ && \
     cd qiskit-aer && \
     python setup.py bdist_wheel -- -DAER_THRUST_BACKEND=CUDA -DAER_CUDA_ARCH="7.0" -DCUSTATEVEC_ROOT=$CUQUANTUM_ROOT && \
     pip install dist/qiskit_aer-0.11.2-cp**-cp**-linux_x86_64.whl
