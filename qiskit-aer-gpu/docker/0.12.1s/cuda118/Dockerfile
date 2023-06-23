@@ -27,7 +27,7 @@ RUN apt install -y cmake && pip install pybind11 pluginbase patch-ng node-semver
     pip install "qiskit[all]==0.43.1" && \
     pip uninstall -y qiskit-aer && \
     cd / && git clone https://github.com/Qiskit/qiskit-aer/ && \
-    cd qiskit-aer && git checkout 27e3ec9f0bdb0723ff569400f7af9575f0c46cf8 && \
+    cd qiskit-aer && git checkout 0.12.1 && \
     python ./setup.py bdist_wheel -- -DAER_THRUST_BACKEND=CUDA -DAER_CUDA_ARCH="7.0; 7.5; 8.0" -DCUQUANTUM_ROOT=/opt/nvidia/cuquantum -DCUTENSOR_ROOT=/opt/nvidia/cutensor -DAER_ENABLE_CUQUANTUM=true -DCUQUANTUM_STATIC=true --
 
 WORKDIR /workdir
