@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.8.0-devel-ubuntu20.04
+FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV CUQUANTUM_ROOT /opt/nvidia/cuquantum
