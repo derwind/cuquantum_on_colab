@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
+FROM nvidia/cuda:11.8.0-devel-ubuntu20.04
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV CUQUANTUM_ROOT /opt/nvidia/cuquantum
@@ -29,6 +29,8 @@ RUN apt install -y cmake && pip install pybind11 pluginbase patch-ng node-semver
     cd / && git clone https://github.com/Qiskit/qiskit-aer/ && \
     cd qiskit-aer && git checkout 0.12.1 && \
     python ./setup.py bdist_wheel -- -DAER_THRUST_BACKEND=CUDA -DAER_CUDA_ARCH="7.0; 7.5; 8.0" -DCUQUANTUM_ROOT=/opt/nvidia/cuquantum -DCUTENSOR_ROOT=/opt/nvidia/cutensor -DAER_ENABLE_CUQUANTUM=true -DCUQUANTUM_STATIC=true --
+RUN pip install auditwheel patchelf && \
+    auditwheel repair --plat linux_x86_64 dist/qiskit_aer*.whl --exclude libva-drm.so.2 --exclude linux-vdso.so.1 --exclude libpthread.so.0 --exclude librt.so.1 --exclude libdl.so.2 --exclude libstdc++.so.6 --exclude libm.so.6 --exclude libgomp.so.1 --exclude libgcc_s.so.1 --exclude libc.so.6 --exclude ld-linux-x86-64.so.2 --exclude libquadmath.so.0
 
 WORKDIR /workdir
 
